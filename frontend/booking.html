@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book a Therapy Session</title>
+  <link rel="stylesheet" href="css/style.css"> <!-- Link to your CSS file -->
+  <script src="js/booking.js" defer></script> <!-- Link to your booking.js script -->
+</head>
+<body>
+  <h1>Book Your Therapy Session</h1>
+
+  <!-- Booking Form -->
+  <div class="booking-form-container">
+    <form id="bookingForm">
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" required>
+
+      <label for="date">Session Date:</label>
+      <input type="date" id="date" name="date" required>
+
+      <button type="submit">Book Now</button>
+    </form>
+
+    <!-- Confirmation Message -->
+    <div id="confirmation"></div>
+  </div>
+
+</body>
+</html>

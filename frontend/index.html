@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AskTherapy</title>
+    <!-- Include Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        /* Reset and base styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        /* Navigation styles */
+        .navbar {
+            position: fixed;
+            width: 100%;
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #0d9488;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #4b5563;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #0d9488;
+        }
+
+        .book-button {
+            background-color: #0d9488;
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            border: none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .book-button:hover {
+            background-color: #0f766e;
+        }
+
+        .menu-button {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero section styles */
+        .hero {
+            padding-top: 5rem;
+            background: linear-gradient(to right, #f0fdfa, #e0f2fe);
+            padding-bottom: 5rem;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 4rem 1rem;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            color: #1f2937;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero p {
+            font-size: 1.125rem;
+            color: #4b5563;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+
+        /* Testimonials section */
+        .testimonials {
+            padding: 4rem 1rem;
+            background: white;
+        }
+
+        .testimonials h2 {
+            text-align: center;
+            font-size: 2rem;
+            color: #1f2937;
+            margin-bottom: 3rem;
+        }
+
+        .testimonial-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: #f9fafb;
+            padding: 2rem;
+            border-radius: 1rem;
+            position: relative;
+        }
+
+        .testimonial {
+            text-align: center;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #4b5563;
+            margin-bottom: 1rem;
+        }
+
+        .testimonial-author {
+            color: #0d9488;
+            font-weight: 500;
+        }
+
+        .testimonial-nav {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .testimonial-nav button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            border-radius: 50%;
+            transition: background-color 0.3s;
+        }
+
+        .testimonial-nav button:hover {
+            background-color: #e5e7eb;
+        }
+
+        /* Footer styles */
+        .footer {
+            background: #1f2937;
+            color: white;
+            padding: 3rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p {
+            color: #9ca3af;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .contact-info div {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .quick-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .quick-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .quick-links a:hover {
+            color: #5eead4;
+        }
+
+        /* Mobile responsiveness */
+        @media (max-width: 768px) {
+            .nav-links, .book-button {
+                display: none;
+            }
+
+            .menu-button {
+                display: block;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Mobile menu styles */
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 4rem;
+            left: 0;
+            right: 0;
+            background: white;
+            padding: 1rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .mobile-menu.active {
+            display: block;
+        }
+
+        .mobile-menu a {
+            display: block;
+            padding: 0.5rem 0;
+            text-decoration: none;
+            color: #4b5563;
+        }
+
+        .mobile-menu .book-button {
+            display: inline-block;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="logo">AskTherapy</div>
+            <div class="nav-links">
+                <a href="#">Home</a>
+                <a href="#">Therapists</a>
+                <a href="#">Services</a>
+                <a href="#">Contact</a>
+            </div>
+            <button class="book-button" id="BookButton" >Session</button>
+            <button class="menu-button">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <a href="#">Home</a>
+        <a href="#">Therapists</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+        <button class="book-button" id="mobileBookButton">Book Session</button>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Begin Your Journey to Wellness</h1>
+            <p>We provide a safe, compassionate space for growth and healing. 
+               Our experienced therapists are here to support you on your path to better mental health.</p>
+            <button class="book-button" id="heroBookButton">Book Your First Session</button>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="testimonials">
+        <h2>Client Experiences</h2>
+        <div class="testimonial-container">
+            <div class="testimonial">
+                <p class="testimonial-text" id="testimonial-text">
+                    "The warm and professional environment helped me feel comfortable from day one. Life-changing experience."
+                </p>
+                <p class="testimonial-author" id="testimonial-author">- Sarah M.</p>
+            </div>
+            <div class="testimonial-nav">
+                <button onclick="prevTestimonial()">
+                    <i class="fas fa-chevron-left"></i>
+                </button>
+                <button onclick="nextTestimonial()">
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>AskTherapy</h3>
+                <p>Providing compassionate mental health care and support for your well-being journey.</p>
+            </div>
+            <div class="footer-section">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <div>
+                        <i class="fas fa-phone"></i>
+                        <span>(555) 123-4567</span>
+                    </div>
+                    <div>
+                        <i class="fas fa-envelope"></i>
+                        <span>contact@asktherapy.com</span>
+                    </div>
+                    <div>
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>123 Healing Street, City</span>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <div class="quick-links">
+                    <a href="#">About Us</a>
+                    <a href="#">Our Services</a>
+                    <a href="#">Book Appointment</a>
+                    <a href="#">Privacy Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const menuButton = document.querySelector('.menu-button');
+        const mobileMenu = document.querySelector('.mobile-menu');
+
+        menuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('active');
+            const icon = menuButton.querySelector('i');
+            if (mobileMenu.classList.contains('active')) {
+                icon.classList.remove('fa-bars');
+                icon.classList.add('fa-times');
+            } else {
+                icon.classList.remove('fa-times');
+                icon.classList.add('fa-bars');
+            }
+        });
+
+        // Testimonials slider
+        const testimonials = [
+            {
+                text: "The warm and professional environment helped me feel comfortable from day one. Life-changing experience.",
+                author: "Sarah M."
+            },
+            {
+                text: "My therapist's approach was exactly what I needed. I'm grateful for the progress we've made together.",
+                author: "James P."
+            },
+            {
+                text: "The booking process was seamless, and the care I received was exceptional.",
+                author: "Emily R."
+            }
+        ];
+
+        let currentTestimonial = 0;
+
+        function updateTestimonial() {
+            const textElement = document.getElementById('testimonial-text');
+            const authorElement = document.getElementById('testimonial-author');
+            
+            textElement.textContent = `"${testimonials[currentTestimonial].text}"`;
+            authorElement.textContent = `- ${testimonials[currentTestimonial].author}`;
+        }
+
+        function nextTestimonial() {
+            currentTestimonial = (currentTestimonial + 1) % testimonials.length;
+            updateTestimonial();
+        }
+
+        function prevTestimonial() {
+            currentTestimonial = (currentTestimonial - 1 + testimonials.length) % testimonials.length;
+            updateTestimonial();
+        }
+// Button functionality to navigate to booking page
+document.getElementById('BookButton').addEventListener('click', () => {
+        window.location.href = '/booking.html'; // Redirect to booking page
+    });
+
+    document.getElementById('mobileBookButton').addEventListener('click', () => {
+        window.location.href = '/booking.html'; // Redirect to booking page
+    });
+
+    document.getElementById('heroBookButton').addEventListener('click', () => {
+        window.location.href = '/booking.html'; // Redirect to booking page
+    });
+
+
+    </script>
+
+<script>
+    document.getElementById('BookButton').addEventListener('click', () => {
+        window.location.href = '/booking.html'; // Adjust the path as needed
+    });
+</script>
+</body>
+</html>
